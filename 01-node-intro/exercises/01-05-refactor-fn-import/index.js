@@ -9,6 +9,7 @@ const input = process.argv[3];
 
 switch (option) {
   case "w":
+    // indiv. function use directly as function name
     write(input);
     break;
   case "r":
@@ -18,6 +19,7 @@ switch (option) {
     clear();
     break;
   case "d":
+    // default function use as classname.functionname()
     utils.duplicate();
     break;
   default:

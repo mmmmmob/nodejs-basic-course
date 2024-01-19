@@ -2,6 +2,7 @@ import fs from "fs";
 const filePath = "data.txt";
 
 // ------------------- //
+// 1.) export each function
 
 export function write(input) {
   fs.appendFileSync(filePath, input + "\n");
@@ -19,6 +20,7 @@ export function clear() {
 }
 
 // ------------------- //
+// 2.) export default
 
 function duplicate() {
   const copy = fs.readFileSync(filePath, "utf-8");
