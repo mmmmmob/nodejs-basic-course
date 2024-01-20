@@ -1,4 +1,4 @@
-import { write, read, clear } from "./utils.js";
+import { clear, read, write } from "./utils.js";
 
 const option = process.argv[2];
 const input = process.argv[3];
