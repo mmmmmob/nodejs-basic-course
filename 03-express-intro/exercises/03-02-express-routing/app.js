@@ -23,16 +23,24 @@ app.post("/users", (req, res) => {
 app.get("/users/:userId", (req, res) => {
   // 3. Implement: returns "Users ID: [NUMBER]", ex. "User ID: 20"
   const id = req.params.userId;
-  res.send(`You're serching for user id ${id}`);
-  console.log(`User ID: ${id}`);
+  if (isNaN(id)) {
+    res.send("only numeric accepted");
+  } else {
+    res.send(`You're serching for user id ${id}`);
+    console.log(`User ID: ${id}`);
+  }
 });
 
 app.post("/users/:userId", (req, res) => {
   // 4. Implement: returns "User ID: [NUMBER], name has been updated to [NAME]".
   const id = req.params.userId;
   const name = req.body.name;
-  res.send(`User ID:${id}'s name has been updated to ${name}`);
-  console.log(`User ID:${id}'s name has been updated to ${name}`);
+  if (isNaN(id)) {
+    res.send("only numeric accepted");
+  } else {
+    res.send(`User ID:${id}'s name has been updated to ${name}`);
+    console.log(`User ID:${id}'s name has been updated to ${name}`);
+  }
 });
 
 app.listen(port, () => {
