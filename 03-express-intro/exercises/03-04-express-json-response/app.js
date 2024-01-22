@@ -17,12 +17,11 @@ app.get("/users/:userId", (req, res) => {
   const name = userDatabase[userId];
 
   if (!name) {
-    res.send(`Error User ID ${userId} not found`);
-    return;
+    res.json({ error: { message: "User not found" } });
   }
 
   // 1. Implement: returns JSON response
-  res.send(`User ID: ${userId} (Name: ${name})`);
+  res.json({ data: { id: userId, name: name } });
 });
 
 app.post("/users/:userId", (req, res) => {
@@ -30,14 +29,13 @@ app.post("/users/:userId", (req, res) => {
   const name = req.body.name;
 
   if (!userDatabase[userId]) {
-    res.send(`Error User ID ${userId} not found`);
+    res.json({ error: { message: "User not found" } });
     return;
   }
 
   userDatabase[userId] = name;
-
   // 2. Implement: returns JSON response
-  res.send(`User ID: ${userId}, name has been updated to ${name}`);
+  res.json({ data: { id: userId, name: name } });
 });
 
 app.listen(port, () => {
