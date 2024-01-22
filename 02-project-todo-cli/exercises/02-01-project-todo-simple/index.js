@@ -8,9 +8,6 @@ const input = process.argv[3];
 // app header with color
 const header = clc.magenta.bgWhite.bold("== To-do App ==");
 
-// add total number of items
-// add number to each items
-// display items in reverse (newer -> older)
 // more coloring
 
 switch (option) {
@@ -23,8 +20,18 @@ switch (option) {
   case "list":
     // list items => fs.readfilesync
     const todo = fs.readFileSync(filePath, "utf-8");
+    // add total number of items
+    const numberOfTodos = todo.split("\n");
     console.log(header);
-    console.log(todo);
+    console.log(`Total to-dos: ${numberOfTodos.length - 1} items.\n`);
+    // add number to each items
+    // display items in reverse (newer -> older)
+    for (let i = numberOfTodos.length; i >= 0; i--) {
+      if (numberOfTodos[i] !== "" && numberOfTodos[i] !== undefined) {
+        let bullet = numberOfTodos.length - 1;
+        console.log(`${bullet - i}. ${numberOfTodos[i]}`);
+      }
+    }
     break;
   case "clear":
     // clear items => fs.truncatesync
