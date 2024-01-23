@@ -1,4 +1,5 @@
 import express from "express";
+import { logRequest } from "./middleware/logRequest.js";
 import { isValidName } from "./utils.js";
 
 const app = express();
@@ -7,6 +8,7 @@ const port = 8000;
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use(express.static("public"));
+app.use(logRequest());
 
 // user database variable here:
 const userDatabase = {
