@@ -1,5 +1,5 @@
-import express from "express";
-import { findTodo, listTodo, createTodo } from "../05-99-model/todo.mjs";
+import express, { json } from "express";
+import { createTodo, findTodo, listTodo } from "../05-99-model/todo.mjs";
 
 const app = express();
 const port = 8000;
@@ -28,14 +28,18 @@ app.post("/todos", (req, res) => {
   const { title, description } = req.body;
 
   // Create a new todo using the `createTodo` function (imported from the model, line: 2)
-  // const todo = ...
+  const todo = createTodo({ title, description });
 
+  if (!req.body.title || !req.body.description) {
+    res
+      .status(404)
+      .json({ error: "cannot create without empty title and description" });
+    return;
+  }
   // Return the newly created todo with a 201 status code
-  // res.status(201).json({
-  //   data: todo,
-  // });
-
-  throw new Error("Not implemented");
+  res.status(201).json({
+    data: todo,
+  });
 });
 
 app.listen(port, () => {
