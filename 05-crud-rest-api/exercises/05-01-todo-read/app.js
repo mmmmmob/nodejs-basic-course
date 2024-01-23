@@ -11,7 +11,7 @@ const port = 8000;
  * parts of an application.
  *
  * In this code, `express.json()` and `express.urlencoded({ extended: true })`
- * are middleware functions that parse incoming request data before it
+ * are middleware functions that parse incoming requestdata before it
  * reaches route handlers. They are called "middleware" because they process the
  * data in the middle of the request-response cycle.
  */
