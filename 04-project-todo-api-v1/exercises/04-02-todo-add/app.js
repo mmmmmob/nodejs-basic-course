@@ -1,8 +1,13 @@
+import cors from "cors";
 import express from "express";
-import { findTodo, listTodos } from "./models/todo.js";
+import { createTodo, findTodo, listTodos } from "./models/todo.js";
 
 const app = express();
 const port = 8000;
+
+app.use(express.json());
+app.use(cors());
+app.use(express.urlencoded({ extended: true }));
 
 app.get("/todos", (req, res) => {
   const todos = listTodos();
@@ -19,6 +24,13 @@ app.get("/todos/:todoId", (req, res) => {
   }
 
   res.json({ data: todo });
+});
+
+app.post("/todos", (req, res) => {
+  const title = req.body.title;
+  const addedTodo = createTodo({ title: title });
+
+  res.json({ data: addedTodo });
 });
 
 app.listen(port, () => {
