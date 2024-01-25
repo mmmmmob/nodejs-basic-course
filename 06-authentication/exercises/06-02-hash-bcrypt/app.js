@@ -1,8 +1,8 @@
-import express from "express";
-import morgan from "morgan";
-import helmet from "helmet";
-import { User } from "./models/user.js";
 import bcrypt from "bcrypt";
+import express from "express";
+import helmet from "helmet";
+import morgan from "morgan";
+import { User } from "./models/user.js";
 
 const app = express();
 const port = 8000;
@@ -24,7 +24,7 @@ app.post("/signup", (req, res) => {
   // Hash password
   // 🍎 Implement: 1.1. Instead of saving plain text password,
   //    hash it first with `bcrypt.hashSync(...)`.
-  const hashedPassword = "Replace this with your code";
+  const hashedPassword = bcrypt.hashSync(password, 10);
 
   // Store new user in database with hashed password
   const user = new User({ email, password: hashedPassword });
@@ -51,7 +51,7 @@ app.post("/login", (req, res) => {
   // Check password
   // 🍎 Implement: 2.1. Instead of directly compare passwords,
   //    use `bcrypt.compareSync(...)` instead.
-  const validPassword = user.password === password;
+  const validPassword = bcrypt.compareSync(password, user.password);
   if (!validPassword) {
     return res
       .status(400)
